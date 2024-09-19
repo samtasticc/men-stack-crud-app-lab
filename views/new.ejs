@@ -3,23 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Page</title>
+    <title>Add a New Planet!</title>
 </head>
 <body>
-    <h1>New Page</h1>
+    <h1>Add a New Planet!</h1>
     <form action="/" method="POST"> <!-- action is your ROUTE, method is the HTML method you want to perform -->
         <label for="name">Name:</label>
         <input type="text" name="name" id="name"/> <!-- when writing this kind of code, make sure it matches your Schema/model. in this case, it is name on models/planets.js. -->
-
+        <br>
+        <br>
         <label for="hasRing">Does this planet have any rings?</label>
         <input type="checkbox" name="hasRing" id="hasRing"/>
-
+        <br>
+        <br>
         <label for="hasMoon">Does this planet have any moons?</label>
         <input type="checkbox" name="hasMoon" id="hasMoon"/>
-
-        <label>Is this planet part of our Inner Solar System or our Outer Solar System?</label>
-        <input type="checkbox" type="checkbox" name="innerOrOuterPlanet" id="innerOrOuterPlanet"/> <!-- might not get away with two checkboxes-->
-
+        <br>
+        <br>
+        <label>Is this planet part of our Inner Solar System?</label>
+        <input type="radio" name="innerPlanet" id="innerPlanet"/>
+        <br>
+        <br>
+        <label>Is this planet part of our Outer Solar System?</label>
+        <input type="radio" name="outerPlanet" id="outerPlanet"/>
+        <br>
+        <br>
         <button type="submit">Add Planet</button>
     </form>
 </body>
