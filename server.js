@@ -12,4 +12,12 @@ const app = express();
 
 
 // ========= ROUTES ========= //
+app.get('/', (req, res) => {
+    // res.send('this is my planet route')
+    res.render('index.ejs')
+})
 
+// ========= SERVER ========= //
+app.listen(3000, () => {
+    console.log('listening on port 3000')
+})
