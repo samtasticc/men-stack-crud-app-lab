@@ -22,6 +22,10 @@ app.get('/', (req, res) => {
     res.render('index.ejs')
 })
 
+app.get('/new', (req, res) => {
+    // res.send('this is my new page')
+    res.render('new.ejs')
+})
 // ========= SERVER ========= //
 app.listen(3000, () => {
     console.log('listening on port 3000')
