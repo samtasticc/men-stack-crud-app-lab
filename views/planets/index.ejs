@@ -6,6 +6,13 @@
     <title>Planets Index</title>
 </head>
 <body>
-    <h1>All Planets: you left off at 01:18:37 on the class recording</h1>
+    <a href="/">Homepage</a> <!-- adds link to the current webpage (which is index of planets) that will take you to the home page-->
+    <a href="/planets/new">Add New Planet</a> <!-- adds link to the current webpage (which is index of planets) that will take you to the form to add a new planet-->
+    <h1>All Planets</h1>
+    <ul>
+        <% planets.forEach(planet => { %>
+            <li><a href='/planets/<%= planet._id %>'><%= planet.name %></a></li>
+        <% }) %>
+    </ul>
 </body>
 </html>

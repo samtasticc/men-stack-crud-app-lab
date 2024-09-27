@@ -25,15 +25,21 @@ app.get('/', (req, res) => {
 // this route will provide the list, or index, of all the planets our database has captured via our form.
 app.get('/planets', async(req, res) => { // make this callback function async so we can use await.
     // res.send('Welcome to the index page')
-    const allPlanets = await Planet.find({}) // this finds the data we are calling.
+    const allPlanets = await Planet.find() // this finds the data we are calling.
     console.log(allPlanets)
-    res.render('planets/index.ejs', allPlanets) // this shows us the data, but only after we make our planets/index.ejs page.
+    res.render('planets/index.ejs', {planets: allPlanets}) // this shows us the data, but only after we make our planets/index.ejs page.
 })
 
 app.get('/planets/new', (req, res) => {
     // res.send('this is my new page')
     res.render('planets/new.ejs')
 })
+
+app.get('/planets/:planetId', async(req, res) => { // this will be our SHOW route
+    const foundPlanet = await Planet.findById(req.params.planetId)
+    // res.send(`this route renders the show page for fruit id: ${req.params.fruitId}`)
+    res.render('planets/show.ejs', {planet: foundPlanet})
+}) 
 
 app.post('/planets', async(req, res) => {
     // console.log(req.body)
@@ -59,7 +65,7 @@ app.post('/planets', async(req, res) => {
         req.body.outerPlanet = false
     } 
     await Planet.create(req.body) // this adds the data we are collecting to our database. req.body contains the form data sent by the user. await ensures the database operation completes before the function continues.
-    res.redirect('/planets/new') // sends us back/redirects us to the empty form on /planets/new
+    res.redirect('/planets') // sends us back/redirects us to the empty form on /planets/new - then we changed it to redirect to the index (/planets)
 })
 // ========= SERVER ========= //
 app.listen(3000, () => {

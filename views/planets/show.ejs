@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= planet.name %></title>
+</head>
+<body>
+    <a href="/">Homepage</a>
+    <a href="/planets/new">Add New Planet</a>
+    <a href="/planets/">Browse our Solar System</a>
+    <h1><%= planet.name %>:</h1>
+    <% if(planet.hasRing) { %>
+        <li>has at least one ring.</li>
+    <% } else { %>
+        <li>does not have any rings.</li>
+    <% } %>
+
+    <% if(planet.hasMoon) { %>
+        <li>has at least one moon.</li>
+    <% } else { %>
+        <li>does not have any moons.</li>
+    <% } %>
+
+    <% if(planet.innerPlanet) { %>
+        <li>is located within our inner solar system.</li>
+    <% } else { %>
+        <li>not located within our inner solar system.</li>
+    <% } %>
+
+    <% if(planet.outerPlanet) { %>
+        <li>is located within our outer solar system.</li>
+    <% } else { %>
+        <li>not located within our outer solar system.</li>
+    <% } %>
+</body>
+</html>
