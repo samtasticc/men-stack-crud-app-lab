@@ -8,4 +8,8 @@ const planetSchema = new mongoose.Schema({
     outerPlanet: Boolean,
 })
 
-const Planet = mongoose.model('Planet', planetSchema) // using an uppercase letter at the beginning is how we create the model
+//this will register Planet
+const Planet = mongoose.model('Planet', planetSchema) // using an uppercase letter at the beginning is how we create the module
+
+// exports the module into server.js
+module.exports = Planet
