@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a New Planet!</title>
+</head>
+<body>
+    <a href="/">Homepage</a> <!-- adds link to the current webpage (which is the form to edit a planet) that will take you to the homepage-->
+    <a href="/planets/new">Add New Planet</a>  <!-- adds link to the current webpage (which is the form to edit a planet) that will take you to the add a new planet form-->
+    <a href="/planets">Browse our Solar System</a> <!-- adds link to the current webpage (which is the form to edit a planet) that will take you to index of planets-->
+    <h1>Add a new planet to our Solar System!</h1>
+    <form action="/planets/<$= planet._id %>?_method=PUT" method="POST"> <!-- action is your ROUTE, method is the HTML method you want to perform -->
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" value="<%= planet.name %>"/> <!-- when writing this kind of code, make sure it matches your Schema/model. in this case, it is name on models/planets.js. -->
+        <br>
+        <br>
+        <label for="hasRing">Does this planet have any rings?</label>
+        <input type="checkbox"
+                name="hasRing" 
+                id="hasRing" 
+                <% if(planet.hasRing){ %> checked <% } %>/>
+        <br>
+        <br>
+        <label for="hasMoon">Does this planet have any moons?</label>
+        <input type="checkbox" 
+                name="hasMoon" 
+                id="hasMoon" 
+                <% if(planet.hasMoon){ %> checked <% } %>/>
+        <br>
+        <br>
+        <label>Is this planet considered an inner planet?</label>
+        <input type="radio" 
+                name="innerPlanet" 
+                id="innerPlanet" 
+                <% if(planet.innerPlanet){ %> checked <% } %>/>
+        <br>
+        <br>
+        <label>Is this planet considered an outer planet?</label>
+        <input type="radio" 
+                name="outerPlanet" 
+                id="outerPlanet" 
+                <% if(planet.outerPlanet){ %> checked <% } %>/>
+        <br>
+        <br>
+        <button type="submit">Update Planet</button>
+    </form>
+
+</body>
+</html>

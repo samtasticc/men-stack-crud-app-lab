@@ -14,6 +14,8 @@ mongoose.connection.on('connected', () => {
 const Planet = require('./models/planets.js')// this imports the Planets model
 // ========= MIDDLEWARE ========= //
 app.use(express.urlencoded({extended: false})) // this enables Express to access the data using middleware. if you dont use this, your POST route wont work
+app.use(methodOverride('_method')) // this envokes the methodOverride package we installed and imported. if you don't do this, your EDIT, UPDATE, and DELETE routes wont work.
+app.use(morgan('dev)')) // this follows methodOverride
 
 
 // ========= ROUTES ========= //
@@ -37,9 +39,48 @@ app.get('/planets/new', (req, res) => {
 
 app.get('/planets/:planetId', async(req, res) => { // this will be our SHOW route
     const foundPlanet = await Planet.findById(req.params.planetId)
-    // res.send(`this route renders the show page for fruit id: ${req.params.fruitId}`)
+    // res.send(`this route renders the show page for planet id: ${req.params.planetId}`)
     res.render('planets/show.ejs', {planet: foundPlanet})
 }) 
+
+app.get('/planets/:planetId/edit', async(req, res) => {
+    const foundPlanet = await Planet.findById(req.params.planetId)
+    console.log(foundPlanet)
+    // res.send(`This is the edit rout for ${foundPlanet.name}`)
+    res.render('planets/edit.ejs', {planet: foundPlanet})
+})
+
+app.put('/planets/:planetId', async(req, res) => {
+    if(req.body.hasRing === 'on') {
+        req.body.hasRing = true
+    } else {
+        req.body.hasRing = false
+    } // the above if/else statement redefines the req.body 'on' to a boolean so it matches our schema better.
+    if(req.body.hasMoon === 'on') {
+        req.body.hasMoon = true
+    } else {
+        req.body.hasMoon = false
+    } 
+    if(req.body.innerPlanet === 'on') {
+        req.body.innerPlanet = true
+    } else {
+        req.body.innerPlanet = false
+    } 
+    if(req.body.outerPlanet === 'on') {
+        req.body.outerPlanet = true
+    } else {
+        req.body.outerPlanet = false
+    } 
+    await Planet.findByIdAndUpdate(req.params.planetId, req.body)
+    res.redirect(`/planets/${req.params.planetId}`)
+})
+
+app.delete('/planets/:planetId', async(req, res) => {
+    // res.send('this is the delete route')
+    // with GET we RENDER, with everything else, we REDIRECT
+    await Planet.findByIdAndDelete(req.params.planetId)
+    res.redirect('/planets')
+})
 
 app.post('/planets', async(req, res) => {
     // console.log(req.body)

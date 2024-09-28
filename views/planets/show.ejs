@@ -23,15 +23,19 @@
     <% } %>
 
     <% if(planet.innerPlanet) { %>
-        <li>is located within our inner solar system.</li>
+        <li>is considered an inner planet.</li>
     <% } else { %>
-        <li>not located within our inner solar system.</li>
+        <li>is not considered an inner planet.</li>
     <% } %>
 
     <% if(planet.outerPlanet) { %>
-        <li>is located within our outer solar system.</li>
+        <li>is considered an outer planet.</li>
     <% } else { %>
-        <li>not located within our outer solar system.</li>
+        <li>is not considered an outer planet.</li>
     <% } %>
+    <form action="/planets/<%= planet._id%>?_method=DELETE" method="POST"> <!-- the ?_method=DELETE is what Express will pick up for us and map the action to our app.delete route-->
+        <button type="submit">Delete <%= planet.name %></button>
+    </form>
+    <a href="/planets/<%= planet._id %>/edit">Edit <%= planet.name %>/edit</a>
 </body>
 </html>
